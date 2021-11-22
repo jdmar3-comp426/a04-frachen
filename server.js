@@ -40,7 +40,7 @@ app.get("/app/users", (req, res) => {
 
 // READ a single user (HTTP method GET) at endpoint /app/user/:id
 app.get("/app/users/:id", (req, res) => {
-	const stmt = db.prepare("SELECT * FROM userinfo").get(req.id);
+	const stmt = db.prepare("SELECT user FROM userinfo WHERE id = ?").get(req.body.id);
 	res.status(200).json(stmt);
 })
 
