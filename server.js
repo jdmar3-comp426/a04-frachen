@@ -12,7 +12,7 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 // Set server port
-var HTTP_PORT = 5500
+var HTTP_PORT = 5000
 // Start server
 app.listen(HTTP_PORT, () => {
 	console.log("Server running on port %PORT%".replace("%PORT%", HTTP_PORT))
@@ -51,11 +51,11 @@ app.get("/app/user/:id", (req, res) => {
 // });
 
 // DELETE a single user (HTTP method DELETE) at endpoint /app/delete/user/:id
-// app.delete("/app/delete/user/:id", (req, res) => {
-// 	const stmt = db.prepare("DELETE FROM userinfo WHERE id = ?");
-// 	const info = stmt.run(req.params.id);
-// 	res.status(200).send(info.changes + " record deleted: ID " + info.lastInsertRowid);
-// });
+app.delete("/app/delete/user/:id", (req, res) => {
+	const stmt = db.prepare("DELETE FROM userinfo WHERE id = ?");
+	const info = stmt.run(req.params.id);
+	res.status(200).send(info.changes + " record deleted: ID " + info.lastInsertRowid);
+});
 
 // Default response for any other request
 app.use(function (req, res) {
